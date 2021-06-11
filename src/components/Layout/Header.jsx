@@ -8,11 +8,13 @@ function Header(props) {
     <Fragment>
       <header className={classes.header}>
         <h1>Meals</h1>
+        {/* 2.1 */}
         <HeaderCartButton onClick={props.onShowCart} />
       </header>
       {/* since we our using -dash, that's why we can't use .notation*/}
       <div className={classes["main-image"]}>
         <img src={mealsImg} alt="Table of foods" />
+        <h1>YOLO</h1>
       </div>
     </Fragment>
   );

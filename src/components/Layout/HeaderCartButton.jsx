@@ -4,6 +4,7 @@ import CartIcon from "../Cart/CartIcon";
 
 function HeaderCartButton(props) {
   return (
+    // 2.2
     <button className={classes.button} onClick={props.onClick}>
       <span className={classes.icon}>
         <CartIcon />
