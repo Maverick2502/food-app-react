@@ -38,7 +38,6 @@ function AvailableMeals() {
       id={meal.id}
       description={meal.description}
       name={meal.name}
-      // description={meal.description}
       price={meal.price}
     />
   ));

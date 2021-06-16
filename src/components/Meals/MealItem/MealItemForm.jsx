@@ -33,6 +33,7 @@ function MealItemForm(props) {
          * thru {...props.input} syntax
          */
         ref={amountInputRef}
+        label="Amount"
         type="text"
         input={{
           id: "amount_" + props.id,

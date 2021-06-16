@@ -16,6 +16,8 @@ const cartReducer = (state, action) => {
       totalAmount: updatedTotalAmount,
     };
   }
+  // BF - returned
+  return defaultCartState;
 };
 
 function CartProvider(props) {
@@ -33,7 +35,8 @@ function CartProvider(props) {
   };
 
   const cartContext = {
-    items: [cartState.items],
+    // BF - items
+    items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
