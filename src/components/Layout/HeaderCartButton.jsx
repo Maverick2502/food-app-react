@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import classes from "./HeaderCartButton.module.css";
-import CartIcon from "../Cart/CartIcon";
 import CartContext from "../../store/cart-context";
+import CartIcon from "../Cart/CartIcon";
+import classes from "./HeaderCartButton.module.css";
 
 function HeaderCartButton(props) {
   const cardCtx = useContext(CartContext);
