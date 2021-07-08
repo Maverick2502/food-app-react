@@ -14,7 +14,6 @@ function Header(props) {
       {/* since we our using -dash, that's why we can't use .notation*/}
       <div className={classes["main-image"]}>
         <img src={mealsImg} alt="Table of foods" />
-        <h1>YOLO</h1>
       </div>
     </Fragment>
   );
