@@ -1,7 +1,17 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classes from "./Checkout.module.css";
 
+const isEmpty = (value) => value.trim() === "";
+const isFiveChars = (value) => value.trim().length === 5;
+
 function Checkout(props) {
+  const [formInputsValidity, setFormInputsValidity] = useState({
+    name: true,
+    street: true,
+    city: true,
+    postal: true,
+  });
+
   const nameInPutRef = useRef();
   const streetInputRef = useRef();
   const postalInputRef = useRef();
@@ -15,11 +25,49 @@ function Checkout(props) {
     const enteredPostal = postalInputRef.current.value;
     const enteredCity = cityInputRef.current.value;
     console.log(enteredCity);
+
+    const enteredNameIsValid = !isEmpty(enteredName);
+    const enteredStreetIsValid = !isEmpty(enteredStreet);
+    const enteredCityIsValid = !isEmpty(enteredCity);
+    const enteredPostalIsValid = isFiveChars(enteredPostal);
+
+    setFormInputsValidity({
+      name: enteredNameIsValid,
+      street: enteredCityIsValid,
+      city: enteredCityIsValid,
+      postal: enteredPostalIsValid,
+    });
+
+    const formIsValid =
+      enteredNameIsValid &&
+      enteredStreetIsValid &&
+      enteredCityIsValid &&
+      enteredPostalIsValid;
+
+    if (!formIsValid) {
+      return;
+    }
   };
+
+  const nameControlClasses = `${classes.control} ${
+    formInputsValidity.name ? "" : classes.invalid
+  }`;
+
+  const streetControlClasses = `${classes.control} ${
+    formInputsValidity.street ? "" : classes.invalid
+  }`;
+
+  const postalControlClasses = `${classes.control} ${
+    formInputsValidity.postal ? "" : classes.invalid
+  }`;
+
+  const cityControlClasses = `${classes.control} ${
+    formInputsValidity.city ? "" : classes.invalid
+  }`;
 
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
-      <div className={classes.control}>
+      <div className={nameControlClasses}>
         <label htmlFor="name">Your Name</label>
         <input
           className={classes.input}
@@ -27,8 +75,9 @@ function Checkout(props) {
           id="name"
           ref={nameInPutRef}
         />
+        {!formInputsValidity.name && <p>Please enter a valid name</p>}
       </div>
-      <div className={classes.control}>
+      <div className={streetControlClasses}>
         <label htmlFor="street">Street</label>
         <input
           className={classes.input}
@@ -36,17 +85,21 @@ function Checkout(props) {
           id="street"
           ref={streetInputRef}
         />
+        {!formInputsValidity.street && <p>Please enter a valid street</p>}
       </div>
-      <div className={classes.control}>
+      <div className={postalControlClasses}>
         <label htmlFor="postal">Postal Code</label>
         <input
           className={classes.input}
-          type="text"
+          //   type="text"
           id="postal"
           ref={postalInputRef}
         />
+        {!formInputsValidity.postal && (
+          <p>Please enter a valid postal code(5 characters long)</p>
+        )}
       </div>
-      <div className={classes.control}>
+      <div className={cityControlClasses}>
         <label htmlFor="city">City</label>
         <input
           className={classes.input}
@@ -54,6 +107,7 @@ function Checkout(props) {
           id="city"
           ref={cityInputRef}
         />
+        {!formInputsValidity.city && <p>Please enter a valid city</p>}
       </div>
       <div className={classes.actions}>
         <button type="button" onClick={props.onCancel}>
