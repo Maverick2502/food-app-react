@@ -47,6 +47,13 @@ function Checkout(props) {
     if (!formIsValid) {
       return;
     }
+
+    props.onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postal: enteredPostal,
+      city: enteredCity,
+    });
   };
 
   const nameControlClasses = `${classes.control} ${
@@ -91,7 +98,7 @@ function Checkout(props) {
         <label htmlFor="postal">Postal Code</label>
         <input
           className={classes.input}
-          //   type="text"
+          type="text"
           id="postal"
           ref={postalInputRef}
         />
